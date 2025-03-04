@@ -1,0 +1,75 @@
+### Java ###
+# 编译后的class文件
+*.class
+
+# 日志文件
+*.log
+
+# 打包文件
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+
+# 虚拟机崩溃日志
+hs_err_pid*
+
+### Maven ###
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+### Spring Boot ###
+.spring-boot-devtools.restart.trigger
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+### Eclipse ###
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+.settings/
+.classpath
+.project
+.factorypath
+.springBeans
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store
+.AppleDouble
+.LSOverride
+
+### Windows ###
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+### 项目特定文件 ###
+# 应用程序配置（包含敏感信息）
+src/main/resources/application-dev.yml
+src/main/resources/application-prod.yml
+
+# 日志目录
+/logs/
+
+# 上传的文件目录
+/uploads/

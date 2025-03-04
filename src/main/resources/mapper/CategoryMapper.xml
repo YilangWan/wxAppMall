@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wxmall.mapper.CategoryMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.wxmall.model.Category">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="parent_id" property="parentId" />
+        <result column="level" property="level" />
+        <result column="visible" property="visible" />
+        <result column="sort" property="sort" />
+        <result column="icon" property="icon" />
+        <result column="description" property="description" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="deleted" property="deleted" />
+        <result column="version" property="version" />
+    </resultMap>
+    
+    <!-- 获取指定层级的分类列表 -->
+    <select id="selectCategoriesByLevel" resultMap="BaseResultMap">
+        SELECT * FROM product_category 
+        WHERE level = #{level} AND deleted = 0 AND visible = 1
+        ORDER BY sort ASC
+    </select>
+    
+    <!-- 获取指定父分类的子分类列表 -->
+    <select id="selectCategoriesByParentId" resultMap="BaseResultMap">
+        SELECT * FROM product_category 
+        WHERE parent_id = #{parentId} AND deleted = 0 AND visible = 1
+        ORDER BY sort ASC
+    </select>
+</mapper>
