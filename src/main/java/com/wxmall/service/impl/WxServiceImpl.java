@@ -163,8 +163,9 @@ public class WxServiceImpl implements WxService {
         user.setUpdateTime(LocalDateTime.now());
         user.setLastLoginTime(LocalDateTime.now());
         
-        // 设置用户名为openid前8位
+        // 设置用户名和密码为openid前8位
         user.setUsername("wx_" + openid.substring(0, Math.min(8, openid.length())));
+        user.setPassword("wx_" + openid.substring(0, Math.min(8, openid.length())));
         
         // 如果有解密的用户信息，则使用微信的昵称和头像
         if (userInfo != null) {
@@ -217,6 +218,15 @@ public class WxServiceImpl implements WxService {
      * @return 包含openid、session_key等信息的JSONObject
      */
     private JSONObject getSessionInfo(String code) {
+        // 测试模式，返回模拟数据
+        if (code.startsWith("test_code")) {
+            JSONObject mockResult = new JSONObject();
+            mockResult.put("openid", "test_openid_" + System.currentTimeMillis());
+            mockResult.put("session_key", "test_session_key_123");
+            mockResult.put("unionid", "test_unionid_123");
+            log.info("测试模式，返回模拟数据: {}", mockResult);
+            return mockResult;
+        }
         String url = wxConfig.getCodeToSessionUrl() + 
                 "?appid=" + wxConfig.getAppid() + 
                 "&secret=" + wxConfig.getSecret() + 
