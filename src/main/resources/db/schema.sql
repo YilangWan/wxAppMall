@@ -68,3 +68,39 @@ CREATE TABLE IF NOT EXISTS `product_category` (
   KEY `idx_parent_id` (`parent_id`),
   KEY `idx_name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='商品分类表';
+
+-- 支付订单表
+CREATE TABLE IF NOT EXISTS `pay_order` (
+  [id](cci:1://file:///Users/yilangwan/Desktop/PersonalProject/AI/wxMallWindSurf/src/main/java/com/wxmall/service/impl/WxServiceImpl.java:133:4-143:5) bigint(20) NOT NULL AUTO_INCREMENT COMMENT '支付订单ID',
+  `order_id` bigint(20) NOT NULL COMMENT '商城订单ID',
+  `user_id` bigint(20) NOT NULL COMMENT '用户ID',
+  `transaction_id` varchar(64) DEFAULT NULL COMMENT '微信支付订单号',
+  `out_trade_no` varchar(64) NOT NULL COMMENT '商户订单号',
+  `total_fee` int(11) NOT NULL COMMENT '订单金额(分)',
+  `body` varchar(128) NOT NULL COMMENT '商品描述',
+  `status` tinyint(1) DEFAULT '0' COMMENT '支付状态：0-未支付，1-支付成功，2-支付失败，3-已退款',
+  `pay_time` datetime DEFAULT NULL COMMENT '支付时间',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `update_time` datetime NOT NULL COMMENT '更新时间',
+  `deleted` tinyint(1) DEFAULT '0' COMMENT '逻辑删除：0-未删除，1-已删除',
+  PRIMARY KEY ([id](cci:1://file:///Users/yilangwan/Desktop/PersonalProject/AI/wxMallWindSurf/src/main/java/com/wxmall/service/impl/WxServiceImpl.java:133:4-143:5)),
+  UNIQUE KEY `idx_out_trade_no` (`out_trade_no`),
+  KEY `idx_order_id` (`order_id`),
+  KEY `idx_user_id` (`user_id`),
+  KEY `idx_transaction_id` (`transaction_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='支付订单表';
+
+-- 支付记录表
+CREATE TABLE IF NOT EXISTS `pay_log` (
+  [id](cci:1://file:///Users/yilangwan/Desktop/PersonalProject/AI/wxMallWindSurf/src/main/java/com/wxmall/service/impl/WxServiceImpl.java:133:4-143:5) bigint(20) NOT NULL AUTO_INCREMENT COMMENT '支付日志ID',
+  `pay_order_id` bigint(20) NOT NULL COMMENT '支付订单ID',
+  `user_id` bigint(20) NOT NULL COMMENT '用户ID',
+  `type` tinyint(1) NOT NULL COMMENT '类型：1-支付，2-退款',
+  `status` tinyint(1) NOT NULL COMMENT '状态：0-失败，1-成功',
+  `amount` int(11) NOT NULL COMMENT '金额(分)',
+  `content` text COMMENT '详细内容',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  PRIMARY KEY ([id](cci:1://file:///Users/yilangwan/Desktop/PersonalProject/AI/wxMallWindSurf/src/main/java/com/wxmall/service/impl/WxServiceImpl.java:133:4-143:5)),
+  KEY `idx_pay_order_id` (`pay_order_id`),
+  KEY `idx_user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='支付记录表';

@@ -42,3 +42,18 @@ wx:
   miniapp:
     appid: 你的小程序appid  # 替换为实际的小程序appid
     secret: 你的小程序secret  # 替换为实际的小程序secret
+  
+  # 微信支付配置
+  pay:
+    appId: 你的小程序appid  # 与小程序appid一致
+    mchId: 你的商户号  # 微信支付商户号
+    mchKey: 你的商户API密钥  # 微信支付商户API密钥
+    keyPath: classpath:cert/apiclient_cert.p12  # 微信支付商户证书路径
+    notifyUrl: https://你的域名/api/pay/notify  # 支付结果通知地址
+    refundNotifyUrl: https://你的域名/api/pay/refund/notify  # 退款结果通知地址
+    tradeType: JSAPI  # 小程序支付类型
+    signType: HMAC-SHA256  # 签名类型
+    sandbox: false  # 是否使用沙箱环境
+    apiV3Key: 你的APIv3密钥  # 微信支付APIv3密钥
+    privateKeyPath: cert/apiclient_key.pem  # 微信支付商户私钥路径
+    certSerialNo: 你的证书序列号  # 微信支付商户证书序列号
